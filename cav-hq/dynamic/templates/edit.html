@@ -1,0 +1,91 @@
+<cvt:template
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cvt="http://xmlns.therebetygers.net/civet/0.2"
+    extends="base.html">
+
+  <cvt:head>
+    <cvt:locale lang="en" country="US" encoding="utf-8" />
+
+  </cvt:head>
+
+  <cvt:block name="pageScripts">
+    <script type="text/javascript">
+      var dirty = false;
+      var bodyMD = "<cvt:var name="bodyMD"/>";
+      var bodyDiv;
+      var bodyHTML;
+      var canEdit = <cvt:var name="canEdit" type="boolean" format="ls"/>;
+    
+      function showEditButton() {
+      }
+      
+      function beginEditing() {
+        bodyDiv.empty();
+      }
+    
+      function discardChanges() {
+      }
+  
+      function previewChanges() {
+      }
+  
+      function submitChanges() {
+      }
+  
+      function setupForAJAX() {
+        $("#beginEditForm").removeAttr("action");
+        $("#beginEditForm").removeAttr("method");
+      }
+  
+      $(document).ready(function () {
+        bodyDiv = $("#articleBody");
+        bodyHTML = bodyDiv.html();
+        if (canEdit) {
+          showEditButton();
+        }
+      });
+    </script>
+  </cvt:block>
+
+  <cvt:block name="styleSheets">
+    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/style/main.css" />
+  </cvt:block>
+
+  <cvt:block name="headerContent">
+    <h1>A R T I C L E &#xa0; E D I T O R &#xa0; P A G E</h1>
+  </cvt:block>
+  
+  <cvt:block name="leftSideContent">
+    <em>Left</em>
+  </cvt:block>
+  
+  <cvt:block name="mainContent">
+    <form name="articleForm" method="POST" >
+      <cvt:attr name="action">
+        <cvt:if test="node_id">
+          /articles/<cvt:var name="node_id"/>
+          <cvt:else>/articles/new</cvt:else>
+        </cvt:if>
+      </cvt:attr>
+      <!-- Might need to eliminate newlines to avoid having content -->
+      <input name="titleInput" type="text">
+        <cvt:attr name="value">
+          <cvt:if test="article_title">
+            <cvt:var name="article_title" />
+            <cvt:else>Enter the title here.</cvt:else>
+          </cvt:if>
+        </cvt:attr>
+      </input> *<br />
+    </form>
+  </cvt:block>
+  
+  <cvt:block name="rightSideContent">
+    <em>Right</em>
+  </cvt:block>
+  
+  <cvt:block name="footerContent">
+    <p class="copyrightNotice">
+      Copyright © <cvt:var name="copyright_year"/> by <cvt:var name="copyright_holders"/>. <cvt:var name="rights_statement"/>.
+    </p>
+  </cvt:block>
+</cvt:template>
