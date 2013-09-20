@@ -4,9 +4,11 @@
 
 (enable-sqlite)
 
-(setup content-path: "data/content"
-       open-connection: (lambda () (open-database "data/preloaded.db"))
-       template-path: "dynamic/templates")
+(setup-db "data/demo.db")
+
+(app-init content-path: "data/content"
+          open-connection: (lambda () (open-database "data/demo.db"))
+          template-path: "dynamic/templates")
 
 (config-set!
   '(urlScheme . "http") '(hostName . "quahog") '(bodyMD . "") '(jquerySrc . "/scripts/jquery.js")

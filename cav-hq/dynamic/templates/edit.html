@@ -8,45 +8,6 @@
 
   </cvt:head>
 
-  <cvt:block name="pageScripts">
-    <script type="text/javascript">
-      var dirty = false;
-      var bodyMD = "<cvt:var name="bodyMD"/>";
-      var bodyDiv;
-      var bodyHTML;
-      var canEdit = <cvt:var name="canEdit" type="boolean" format="ls"/>;
-    
-      function showEditButton() {
-      }
-      
-      function beginEditing() {
-        bodyDiv.empty();
-      }
-    
-      function discardChanges() {
-      }
-  
-      function previewChanges() {
-      }
-  
-      function submitChanges() {
-      }
-  
-      function setupForAJAX() {
-        $("#beginEditForm").removeAttr("action");
-        $("#beginEditForm").removeAttr("method");
-      }
-  
-      $(document).ready(function () {
-        bodyDiv = $("#articleBody");
-        bodyHTML = bodyDiv.html();
-        if (canEdit) {
-          showEditButton();
-        }
-      });
-    </script>
-  </cvt:block>
-
   <cvt:block name="styleSheets">
     <link id="ss-main" rel="stylesheet" type="text/css" href="/static/style/main.css" />
   </cvt:block>
@@ -67,7 +28,6 @@
           <cvt:else>/articles/new</cvt:else>
         </cvt:if>
       </cvt:attr>
-      <!-- Might need to eliminate newlines to avoid having content -->
       <input name="titleInput" type="text">
         <cvt:attr name="value">
           <cvt:if test="article_title">
@@ -83,9 +43,11 @@
     <em>Right</em>
   </cvt:block>
   
+  <!--
   <cvt:block name="footerContent">
     <p class="copyrightNotice">
       Copyright © <cvt:var name="copyright_year"/> by <cvt:var name="copyright_holders"/>. <cvt:var name="rights_statement"/>.
     </p>
   </cvt:block>
+  -->
 </cvt:template>
