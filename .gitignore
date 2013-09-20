@@ -1,0 +1,10 @@
+*.c
+*.so
+*.o
+*.swp
+*.import.scm
+*.db
+scratch/*
+static-demo/pages/*.html
+*-pages
+*.sxml
