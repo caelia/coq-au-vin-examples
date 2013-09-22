@@ -1,10 +1,12 @@
 (use coq-au-vin)
 (use cav-db-sqlite)
-(include "cav-web-fcgi.scm")
+(include "../common/cav-web-fcgi.scm")
+(include "../common/populate-db.scm")
 
 (enable-sqlite)
 
 (setup-db "data/demo.db")
+(populate "data/demo.db")
 
 (app-init content-path: "data/content"
           open-connection: (lambda () (open-database "data/demo.db"))
@@ -15,4 +17,4 @@
   '(canEdit . #t) '(copyright_year . 2013) '(copyright_holders . "Madeleine C St Clair")
   '(rights_statement . "You have no rights") '(htmlTitle . "Civet Page!") '(bodyClasses . ""))
 
-(run)
+(run 4567)
