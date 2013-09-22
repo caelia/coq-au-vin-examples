@@ -10,12 +10,6 @@
 (use uri-common)
 (use matchable)
 
-(define listen-port
-  (let ((env-port (get-environment-variable "CAV_PORT")))
-    (if env-port
-      (string->number env-port)
-      3125)))
-
 (define (log-obj msg obj #!optional (logfile "obj.log"))
   (with-output-to-file
     logfile
@@ -69,8 +63,7 @@
       [_
         (out "Status: 404 Not Found\r\n\r\n")])))
 
-(define (run)
-  ;(enable-sqlite)
+(define (run listen-port)
   (fcgi-accept-loop listen-port 0 request-handler))
 
 ;;; OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
