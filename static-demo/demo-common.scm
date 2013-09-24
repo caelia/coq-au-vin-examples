@@ -26,4 +26,4 @@
             (lambda ()
               (get-article-page/html nid))))
         node_ids)
-      ((db:disconnect))
+      ((db:disconnect)))))
