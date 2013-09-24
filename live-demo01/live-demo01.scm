@@ -3,14 +3,12 @@
 (include "../common/cav-web-fcgi.scm")
 (include "../common/populate-db.scm")
 
-(enable-sqlite)
+(enable-sqlite "data/demo.db" "data/content")
 
 (setup-db "data/demo.db")
 (populate "data/demo.db")
 
-(app-init content-path: "data/content"
-          open-connection: (lambda () (open-database "data/demo.db"))
-          template-path: "dynamic/templates")
+(app-init template-path: "dynamic/templates")
 
 (config-set!
   '(urlScheme . "http") '(hostName . "quahog") '(bodyMD . "") '(jquerySrc . "/scripts/jquery.js")
