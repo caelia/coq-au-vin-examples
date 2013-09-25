@@ -21,11 +21,17 @@
 ;;; ------------------------------------------------------------------------
 
 (define (request-handler in out err env)
-  (let* ((env* (env))
-         (method (alist-ref "REQUEST_METHOD" env* string=?))
-         (path-str (alist-ref "REQUEST_URI" env* string=?))
+  (let* ((alist-stref
+           (lambda (key alist)
+             (alist-ref key alist string=?)))
+         (env* (env))
+         (method (alist-stref "REQUEST_METHOD" env*))
+         (path-str (alist-stref "REQUEST_URI" env*))
+         (qstring (alist-stref "QUERY_STRING" env*))
+         (query (form-urldecode qstring))
+         (offset (alist-ref 'offset query))
          (path (uri-path (uri-reference path-str)))
-         (spec (list path method))
+         (spec (list path method offset))
          (send-page
            (lambda (type data)
              (let ((len (string-length data)))
@@ -40,26 +46,36 @@
              (send-page "application/json" data))))
     ; (logerr (with-output-to-string (lambda () (pretty-print env*))))
     (match spec
-      [(or ((/ "") "GET") ((/ "articles") "GET"))
+      [(or ((/ "") "GET" #f) ((/ "articles") "GET" #f))
        (send-html (get-article-list-page/html out: #f))]
-      [((/ "articles" id/alias) "GET")
+      [(or ((/ "") "GET" #f) ((/ "articles") "GET" ofs))
+       (send-html (get-article-list-page/html out: #f offset: (string->number ofs)))]
+      [((/ "articles" id/alias) "GET" _)
        (send-html (get-article-page/html id/alias out: #f))]
-      [((or (/ "series") (/ "series" "")) "GET")
+      [((or (/ "series") (/ "series" "")) "GET" _)
        (send-html (get-meta-list-page/html 'series #f))]
-      [((/ "series" series-title) "GET")
+      [((/ "series" series-title) "GET" #f)
        (send-html (get-article-list-page/html criterion: `(series ,series-title) out: #f))]
-      [((or (/ "tags") (/ "tags" "")) "GET")
+      [((/ "series" series-title) "GET" ofs)
+       (send-html (get-article-list-page/html criterion: `(series ,series-title) out: #f offset: (string->number ofs)))]
+      [((or (/ "tags") (/ "tags" "")) "GET" _)
        (send-html (get-meta-list-page/html 'tags #f))]
-      [((/ "tags" tag) "GET")
+      [((/ "tags" tag) "GET" #f)
        (send-html (get-article-list-page/html criterion: `(tag ,tag) out: #f))]
-      [((or (/ "authors") (/ "authors" "")) "GET")
+      [((/ "tags" tag) "GET" ofs)
+       (send-html (get-article-list-page/html criterion: `(tag ,tag) out: #f offset: (string->number ofs)))]
+      [((or (/ "authors") (/ "authors" "")) "GET" _)
        (send-html (get-meta-list-page/html 'authors #f))]
-      [((/ "authors" author) "GET")
+      [((/ "authors" author) "GET" #f)
        (send-html (get-article-list-page/html criterion: `(author ,author) out: #f))]
-      [((or (/ "categories") (/ "categories" "")) "GET")
+      [((/ "authors" author) "GET" ofs)
+       (send-html (get-article-list-page/html criterion: `(author ,author) out: #f offset: (string->number ofs)))]
+      [((or (/ "categories") (/ "categories" "")) "GET" _)
        (send-html (get-meta-list-page/html 'categories #f))]
-      [((/ "categories" category) "GET")
+      [((/ "categories" category) "GET" #f)
        (send-html (get-article-list-page/html criterion: `(category ,category) out: #f))]
+      [((/ "categories" category) "GET" ofs)
+       (send-html (get-article-list-page/html criterion: `(category ,category) out: #f offset: (string->number ofs)))]
       [_
         (out "Status: 404 Not Found\r\n\r\n")])))
 
