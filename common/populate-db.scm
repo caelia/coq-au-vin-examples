@@ -1,8 +1,9 @@
 (use sql-de-lite)
 
 (define queries
-  '("INSERT INTO \"roles\" VALUES(1,'admin');" "INSERT INTO \"roles\" VALUES(3,'author');"
-    "INSERT INTO \"roles\" VALUES(2,'editor');" "INSERT INTO \"roles\" VALUES(4,'guest');"
+  '("INSERT INTO \"roles\" VALUES(1,'admin');" "INSERT INTO \"roles\" VALUES(2,'editor');"
+    "INSERT INTO \"roles\" VALUES(3,'author');" "INSERT INTO \"roles\" VALUES(4,'member');"
+    "INSERT INTO \"roles\" VALUES(5,'guest');"
     "INSERT INTO \"tags\" VALUES(9,'art deco');" "INSERT INTO \"tags\" VALUES(2,'autism');"
     "INSERT INTO \"tags\" VALUES(25,'beer');" "INSERT INTO \"tags\" VALUES(15,'bicycles');"
     "INSERT INTO \"tags\" VALUES(5,'birth control');" "INSERT INTO \"tags\" VALUES(26,'brazil');"
