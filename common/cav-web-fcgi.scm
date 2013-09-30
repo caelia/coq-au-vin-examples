@@ -50,6 +50,18 @@
        (send-html (get-article-list-page/html out: #f))]
       [(or ((/ "") "GET" #f) ((/ "articles") "GET" ofs))
        (send-html (get-article-list-page/html out: #f offset: (string->number ofs)))]
+      [((/ "articles" "new") "GET" _)
+       (send-html (get-new-article-form/html out: #f))]
+      [((/ "articles" "new") "POST" _)
+       (let* ((raw-form (fcgi-get-post-data in env))
+              (form-data (form-urldecode raw-form)))
+         (send-html (add-article form-data out: #f))]
+      [((/ "articles" id/alias) "POST" _)
+       (let* ((raw-form (fcgi-get-post-data in env))
+              (form-data (form-urldecode raw-form)))
+         (send-html (update-article id/alias form-data out: #f))]
+      [((/ "articles" id/alias "edit") "GET" _)
+       (send-html (get-article-edit-form/html id/alias out: #f))]
       [((/ "articles" id/alias) "GET" _)
        (send-html (get-article-page/html id/alias out: #f))]
       [((or (/ "series") (/ "series" "")) "GET" _)
