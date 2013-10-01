@@ -29,3 +29,21 @@
 #header {
   color: #ffaaff;
 }
+
+.ArticleEditForm {
+  display: table;
+}
+
+.FormRow {
+  display: table-row;
+}
+
+.ArticleEditForm label, .ArticleEditForm input, .ArticleEditForm textarea {
+  display: table-cell;
+  margin: 4px;
+}
+
+.ArticleEditForm label {
+  background-color: #ffc7c7;
+  text-align: right;
+}
