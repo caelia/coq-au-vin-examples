@@ -1,0 +1,129 @@
+<cvt:template
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cvt="http://xmlns.therebetygers.net/civet/0.2"
+    extends="base.html">
+
+  <cvt:head>
+    <cvt:locale lang="en" country="US" encoding="utf-8" />
+
+  </cvt:head>
+
+  <cvt:block name="styleSheets">
+    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/styles/main.css" />
+  </cvt:block>
+
+  <cvt:block name="headerContent">
+    <h1>A R T I C L E &#xa0; E D I T O R &#xa0; P A G E</h1>
+  </cvt:block>
+  
+  <cvt:block name="leftSideContent">
+    <em>Left</em>
+  </cvt:block>
+  
+  <cvt:block name="mainContent">
+    <form class="ArticleEditForm" name="articleForm" method="POST" >
+      <cvt:attr name="action">
+        <cvt:if test="node_id">
+          /articles/<cvt:var name="node_id"/>
+          <cvt:else>/articles/new</cvt:else>
+        </cvt:if>
+      </cvt:attr>
+      <div class="FormRow">
+        <label for="titleInput">Title:</label>
+        <input id="titleInput" name="title" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="article_title">
+              <cvt:var name="article_title" />
+              <cvt:else>Enter the title here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input> *
+      </div>
+      <div class="FormRow">
+        <label for="subtitleInput">Subtitle:</label>
+        <input id="subtitleInput" name="subtitle" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="subtitle">
+              <cvt:var name="subtitle" />
+              <cvt:else>Enter the subtitle here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input>
+      </div>
+      <div class="FormRow">
+        <label for="seriesInput">Series:</label>
+        <input id="seriesInput" name="series" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="series">
+              <cvt:var name="series" />
+              <cvt:else>Enter the series title here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input>
+      </div>
+      <div class="FormRow">
+        <label for="authorsInput">Author(s):</label>
+        <input id="authorsInput" name="authors" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="authors">
+              <cvt:for each="auth" in="authors" sort="none">
+                <cvt:interpolate>, </cvt:interpolate>
+                <cvt:var name="auth.uname" />
+              </cvt:for>
+              <cvt:else>Enter the username for each author here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input> *
+      </div>
+      <div class="FormRow">
+        <label for="categoriesInput">Categories:</label>
+        <input id="categoriesInput" name="categories" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="categories">
+              <cvt:for each="cat" in="categories" sort="none">
+                <cvt:interpolate>, </cvt:interpolate>
+                <cvt:var name="cat" />
+              </cvt:for>
+              <cvt:else>Enter categories here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input>
+      </div>
+      <div class="FormRow">
+        <label for="tagsInput">Tags:</label>
+        <input id="tagsInput" name="tags" type="text">
+          <cvt:attr name="value">
+            <cvt:if test="tags">
+              <cvt:for each="tag" in="tags" sort="alpha">
+                <cvt:interpolate>, </cvt:interpolate>
+                <cvt:var name="tag" />
+              </cvt:for>
+              <cvt:else>Enter tags here.</cvt:else>
+            </cvt:if>
+          </cvt:attr>
+        </input>
+      </div>
+      <div class="FormRow">
+        <label for="bodyInput">Body:</label>
+        <textarea id="bodyInput" name="body" rows="20" cols="60">
+          <cvt:if test="content.body">
+            <cvt:var name="content.body" />
+            <cvt:else>Enter body text in Markdown format.</cvt:else>
+          </cvt:if>
+        </textarea> *
+      </div>
+    </form>
+  </cvt:block>
+  
+  <cvt:block name="rightSideContent">
+    <em>Right</em>
+  </cvt:block>
+  
+  <!--
+  <cvt:block name="footerContent">
+    <p class="copyrightNotice">
+      Copyright © <cvt:var name="copyright_year"/> by <cvt:var name="copyright_holders"/>. <cvt:var name="rights_statement"/>.
+    </p>
+  </cvt:block>
+  -->
+</cvt:template>
