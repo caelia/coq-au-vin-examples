@@ -26,6 +26,24 @@
         <cvt:var name="tag" />
       </a>
     </cvt:defmacro>
+    
+    <cvt:defmacro name="simplePagerNewerLink">
+      <a class="NewerLink">
+        <cvt:attr name="href">
+          <cvt:var name="self_base_url" />?offset=<cvt:var name="simple_pager.newer" type="integer" />
+        </cvt:attr>
+        &lt; Newer Posts
+      </a>
+    </cvt:defmacro>
+    
+    <cvt:defmacro name="simplePagerOlderLink">
+      <a class="OlderLink">
+        <cvt:attr name="href">
+          <cvt:var name="self_base_url" />?offset=<cvt:var name="simple_pager.older" type="integer" />
+        </cvt:attr>
+        Older Posts &gt;
+      </a>
+    </cvt:defmacro>
   </cvt:head>
 
   <cvt:block name="pageScripts">
@@ -68,7 +86,7 @@
   </cvt:block>
 
   <cvt:block name="styleSheets">
-    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/style/main.css" />
+    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/styles/main.css" />
   </cvt:block>
 
   <!--
@@ -135,6 +153,16 @@
         </div>
       </div>
     </cvt:for>
+    <cvt:if test="simple_pager">
+      <div class="pager">
+        <cvt:if test="simple_pager.newer">
+          <cvt:macro name="simplePagerNewerLink"  />
+        </cvt:if>
+        <cvt:if test="simple_pager.older">
+          <cvt:macro name="simplePagerOlderLink"  />
+        </cvt:if>
+      </div>
+    </cvt:if>
   </cvt:block>
   
   <cvt:block name="rightSideContent">
