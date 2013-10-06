@@ -1,0 +1,16 @@
+(use coq-au-vin)
+(use cav-db-sqlite)
+(include "../common/cav-web-fcgi.scm")
+
+(define blog-root "%BLOG_ROOT%")
+
+(enable-sqlite (make-pathname blog-root "data/blog.db") (make-pathname blog-root "data/content"))
+
+(app-init template-path: (make-pathname blog-root "dynamic/templates"))
+
+(config-set!
+  '(urlScheme . "http") '(hostName . "quahog") '(bodyMD . "") '(jquerySrc . "/scripts/jquery.js")
+  '(canEdit . #t) '(copyright_year . 2013) '(copyright_holders . "Matt Gushee")
+  '(rights_statement . "This content may not be reproduced for commercial purposes."))
+
+(run 3128)

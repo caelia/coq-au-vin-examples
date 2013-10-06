@@ -6,18 +6,6 @@
   <cvt:head>
     <cvt:locale lang="en" country="US" encoding="utf-8" />
 
-    <!-- Not being used
-    <cvt:defvar name="contentPath">
-      <cvt:var name="urlScheme"/>://<cvt:var name="hostName"/>/content/
-    </cvt:defvar>
-    -->
-
-    <!-- This doesn't work, because cvt:attr is handled outside the normal flow
-    <cvt:defmacro name="articleHREF">
-      <cvt:attr name="href"><cvt:var name="article.node_id" />.html</cvt:attr>
-    </cvt:defmacro>
-    -->
-
     <cvt:defmacro name="tagLink">
       <a>
         <cvt:attr name="href">
@@ -45,6 +33,10 @@
       </a>
     </cvt:defmacro>
   </cvt:head>
+
+  <cvt:block name="htmlTitle">
+    <title>Coq au Vin: Articles</title>
+  </cvt:block>
 
   <cvt:block name="pageScripts">
     <script type="text/javascript">
@@ -85,18 +77,6 @@
     </script>
   </cvt:block>
 
-  <cvt:block name="styleSheets">
-    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/styles/main.css" />
-  </cvt:block>
-
-  <!--
-  <cvt:block name="bodyClass">SingleArticle</cvt:block>
-  -->
-  
-  <cvt:block name="headerContent">
-    <h1>A R T I C L E &#xa0; L I S T &#xa0; P A G E</h1>
-  </cvt:block>
-  
   <cvt:block name="leftSideContent">
     <em>Left</em>
   </cvt:block>

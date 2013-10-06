@@ -7,17 +7,18 @@
     xmlns:cvt="http://xmlns.therebetygers.net/civet/0.2"
     xml:lang="en" lang="en">
   <head>
-    <title><cvt:var name="htmlTitle"/></title>
+    <cvt:block name="htmlTitle"/>
     <script type="text/javascript" cvt:src="jquerySrc">&#xa0;</script>
     <cvt:block name="pageScripts"/>
-    <cvt:block name="styleSheets"/>
+    <cvt:block name="styleSheets">
+      <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+    </cvt:block>
   </head>
   <body> 
-    <cvt:attr name="class">
-      <cvt:var name="bodyClasses"/>
-    </cvt:attr>
     <div id="header">
-      <cvt:block name="headerContent"/>
+      <cvt:block name="headerContent">
+        <img src="/images/coq-au-vin-banner.png" alt="Coq au Vin: Blogware for Discerning Minimalists" />
+      </cvt:block>
     </div>
     <div id="mainRegion">
       <div id="leftSide">

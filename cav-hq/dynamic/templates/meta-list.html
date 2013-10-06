@@ -16,6 +16,12 @@
     </cvt:defmacro>
   </cvt:head>
 
+  <cvt:block name="htmlTitle">
+    <title>
+      Coq au Vin: <cvt:var name="subject" />
+    </title>
+  </cvt:block>
+
   <cvt:block name="pageScripts">
     <script type="text/javascript">
       var dirty = false;
@@ -55,18 +61,6 @@
     </script>
   </cvt:block>
 
-  <cvt:block name="styleSheets">
-    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/styles/main.css" />
-  </cvt:block>
-
-  <!--
-  <cvt:block name="bodyClass">SingleArticle</cvt:block>
-  -->
-  
-  <cvt:block name="headerContent">
-    <h1>M E T A - L I S T &#xa0; P A G E</h1>
-  </cvt:block>
-  
   <cvt:block name="leftSideContent">
     <em>Left</em>
   </cvt:block>

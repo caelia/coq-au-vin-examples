@@ -11,6 +11,10 @@
     </cvt:defvar>
   </cvt:head>
 
+  <cvt:block name="htmlTitle">
+    <title><cvt:var name="article_title" /></title>
+  </cvt:block>
+
   <cvt:block name="pageScripts">
     <script type="text/javascript">
       var dirty = false;
@@ -50,18 +54,6 @@
     </script>
   </cvt:block>
 
-  <cvt:block name="styleSheets">
-    <link id="ss-main" rel="stylesheet" type="text/css" href="/static/styles/main.css" />
-  </cvt:block>
-
-  <!--
-  <cvt:block name="bodyClass">SingleArticle</cvt:block>
-  -->
-  
-  <cvt:block name="headerContent">
-    <h1>S I N G L E &#xa0; A R T I C L E &#xa0; P A G E</h1>
-  </cvt:block>
-  
   <cvt:block name="leftSideContent">
     <em>Left</em>
   </cvt:block>
