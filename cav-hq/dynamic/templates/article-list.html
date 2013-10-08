@@ -87,7 +87,12 @@
     <cvt:for each="article" in="articles" sort="none">
       <div class="TeaserBlock">
         <cvt:if test="article.series">
-          <h4 class="seriesTitle"><cvt:var name="article.series"/><cvt:if test="article.series_pt">, Part <cvt:var name="article.series_pt"/></cvt:if></h4>
+          <h4 class="seriesTitle">
+            <a>
+              <cvt:attr name="href">/series/<cvt:var name="article.series" /></cvt:attr>
+              <cvt:var name="article.series"/>
+            </a>
+            <cvt:if test="article.series_pt">, Part <cvt:var name="article.series_pt"/></cvt:if></h4>
         </cvt:if>
         <h3 class="articleTitle">
           <a>
@@ -149,9 +154,4 @@
     <em>Right</em>
   </cvt:block>
   
-  <cvt:block name="footerContent">
-    <p class="copyrightNotice">
-      Copyright © <cvt:var name="copyright_year"/> by <cvt:var name="copyright_holders"/>. <cvt:var name="rights_statement"/>.
-    </p>
-  </cvt:block>
 </cvt:template>
