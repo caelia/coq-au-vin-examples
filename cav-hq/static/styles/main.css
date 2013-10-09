@@ -370,12 +370,17 @@ html {
   display: table-row;
 }
 
+.FormRow label {
+  font-weight: bold;
+}
+
 .ButtonRow {
   padding-top: 1.5em;
 }
 
 .ArticleEditForm label, .ArticleEditForm input, .ArticleEditForm textarea {
   display: table-cell;
+  border-collapse: separate;
   margin: 4px;
 }
 
@@ -405,4 +410,9 @@ html {
 .articleSubTitle {
   font-family: florencesansregular;
   color: #8a0000;
+}
+
+button {
+  display: inline-block;
+  margin: .25em 1em .5em 1em;
 }

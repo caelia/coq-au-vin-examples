@@ -19,8 +19,8 @@
   <cvt:block name="mainContent">
     <form class="ArticleEditForm" name="articleForm" method="POST" >
       <cvt:attr name="action">
-        <cvt:if test="node_id">
-          /articles/<cvt:var name="node_id"/>
+        <cvt:if test="articleID">
+          /articles/<cvt:var name="articleID"/>
           <cvt:else>/articles/new</cvt:else>
         </cvt:if>
       </cvt:attr>
@@ -108,9 +108,16 @@
           </cvt:if>
         </textarea> *
       </div>
+      <div class="FormRow">
+        <label for="unameInput">Username:</label>
+        <input id="unameInput" name="uname" type="text" /> *
+      </div>
+      <div class="FormRow">
+        <label for="passwordInput">Password:</label>
+        <input id="passwordInput" name="password" type="password" /> *
+      </div>
       <div class="ButtonRow">
-        <button type="submit">OK</button>
-        <button type="reset">Reset</button>
+        <button type="submit">OK</button><button type="reset">Reset</button>
       </div>
     </form>
   </cvt:block>
