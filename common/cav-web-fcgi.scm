@@ -15,7 +15,8 @@
     logfile
     (lambda ()
       (print msg)
-      (pp obj))))
+      (pp obj))
+    #:append))
 
 ;;; IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 ;;; ------------------------------------------------------------------------
@@ -44,7 +45,6 @@
          (send-json
            (lambda (data)
              (send-page "application/json" data))))
-    ; (logerr (with-output-to-string (lambda () (pretty-print env*))))
     (match spec
       [(or ((/ "") "GET" #f) ((/ "articles") "GET" #f))
        (send-html (get-article-list-page/html out: #f))]
