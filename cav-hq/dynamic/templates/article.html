@@ -60,17 +60,17 @@
   
   <cvt:block name="mainContent">
     <cvt:if test="series">
-      <h4 class="seriesTitle">
+      <h5 class="seriesTitle">
         <a>
           <cvt:attr name="href">/series/<cvt:var name="series" /></cvt:attr>
           <cvt:var name="series"/>
         </a>
         <cvt:if test="series_pt">, Part <cvt:var name="series_pt"/></cvt:if>
-      </h4>
+      </h5>
     </cvt:if>
     <h3 class="articleTitle"><cvt:var name="article_title"/></h3>
     <cvt:if test="subtitle">
-      <h5 class="articleSubTitle"><cvt:var name="subtitle"/></h5>
+      <h4 class="articleSubTitle"><cvt:var name="subtitle"/></h4>
     </cvt:if>
     <div class="author-time">
       <span class="authors">
@@ -106,8 +106,8 @@
         </cvt:with>
       </cvt:for>
     </div>
-    <form id="beginEditForm" cvt:action="editURL" method="POST">
-      <input id="returnTo" name="returnTo" type="hidden" cvt:value="currentPath" />
+    <form id="beginEditForm" cvt:action="editURL" method="GET">
+      <!-- <input id="returnTo" name="returnTo" type="hidden" cvt:value="currentPath" /> -->
       <button id="editButton" name="editButton" type="submit">Edit</button>
     </form>
   </cvt:block>
