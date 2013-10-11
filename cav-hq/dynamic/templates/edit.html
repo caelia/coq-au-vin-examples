@@ -17,7 +17,7 @@
   </cvt:block>
   
   <cvt:block name="mainContent">
-    <form class="ArticleEditForm" name="articleForm" method="POST" >
+    <form name="articleForm" method="POST" class="ArticleEditForm">
       <cvt:attr name="action">
         <cvt:if test="articleID">
           /articles/<cvt:var name="articleID"/>
@@ -116,8 +116,11 @@
         <label for="passwordInput">Password:</label>
         <input id="passwordInput" name="password" type="password" /> *
       </div>
-      <div class="ButtonRow">
+      <div class="FormRow">
+        <span class="Blank">&#xa0;</span>
+        <div class="ButtonBox">
         <button type="submit">OK</button><button type="reset">Reset</button>
+        </div>
       </div>
     </form>
   </cvt:block>
