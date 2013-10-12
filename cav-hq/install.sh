@@ -7,7 +7,14 @@ if [ -z "$dest_path" ]; then
     exit 1
 fi
 
-sed "s|%BLOG_ROOT%|$dest_path|g" cav-blog.scm.in >cav-blog.scm
+fcgi_port=3128
+
+if [ -n "$2" ]; then
+    fcgi_port="$2"
+fi
+
+sed "s|%BLOG_ROOT%|$dest_path|g" cav-blog.scm.in \
+    |sed "s|%FCGI_PORT%|$fcgi_port|g" >cav-blog.scm
 
 mkdir -p ${dest_path}/data/content
 cp -R dynamic $dest_path
