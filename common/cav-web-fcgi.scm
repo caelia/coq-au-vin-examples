@@ -9,6 +9,7 @@
 (use fastcgi)
 (use uri-common)
 (use matchable)
+(use utf8-srfi-13)
 
 (define (log-obj msg obj #!optional (logfile "obj.log"))
   (with-output-to-file
@@ -27,7 +28,8 @@
              (alist-ref key alist string=?)))
          (env* (env))
          (method (alist-stref "REQUEST_METHOD" env*))
-         (path-str (alist-stref "REQUEST_URI" env*))
+         (path-str* (alist-stref "REQUEST_URI" env*))
+         (path-str (if (string=? path-str* "/") "/" (string-trim-right path-str* #\/)))
          (qstring (alist-stref "QUERY_STRING" env*))
          (query (form-urldecode qstring))
          (offset (alist-ref 'offset query))
