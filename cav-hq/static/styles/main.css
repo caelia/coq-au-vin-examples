@@ -113,6 +113,7 @@ html {
   margin-bottom: .5em;
 }
 
+/*
 .teaser p {
   display: inline;
 }
@@ -120,13 +121,23 @@ html {
 .teaser a {
   padding-left: .5em;
 }
+*/
+
+a.ArticlePageLink {
+  font-family: "DejaVu Sans", "Vera Sans", Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 80%;
+  text-decoration: none;
+}
 
 .tags {
-  padding-top: .5em;
+  padding-top: .8em;
+  font-size: 88%;
 }
 
 .author-time {
   font-style: italic;
+  font-size: 88%;
 }
 
 #beginEditForm {
