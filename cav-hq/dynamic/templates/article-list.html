@@ -125,13 +125,13 @@
         </div>
         <div class="teaser">
           <cvt:var name="article.text"/>
-          <a>  
+          <a class="ArticlePageLink">  
             <cvt:attr name="href">/articles/<cvt:var name="article.node_id" /></cvt:attr>
-            MORE
+            [ READ MORE ]
           </a>
         </div>
         <div class="tags">
-          Tags:
+          <strong>Tags: </strong>
           <cvt:for each="tag" in="article.tags" sort="alpha">
             <cvt:interpolate>, </cvt:interpolate>
             <cvt:macro name="tagLink" />
