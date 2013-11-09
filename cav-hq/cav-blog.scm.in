@@ -1,6 +1,6 @@
 (use coq-au-vin)
 (use cav-db-sqlite)
-(include "../common/cav-web-fcgi.scm")
+(include "cav-web-fcgi.scm")
 
 (define blog-root "%BLOG_ROOT%")
 
@@ -9,8 +9,8 @@
 (app-init template-path: (make-pathname blog-root "dynamic/templates"))
 
 (config-set!
-  '(urlScheme . "http") '(hostName . "quahog") '(bodyMD . "") '(jquerySrc . "/scripts/jquery.js")
-  '(canEdit . #t) '(copyright_year . 2013) '(copyright_holders . "Matt Gushee")
+  '(url_scheme . "http") '(host_name . "quahog") '(body_md . "") '(jquery_src . "/scripts/jquery.js")
+  '(can_edit . #t) '(copyright_year . 2013) '(copyright_holders . "Matt Gushee")
   '(rights_statement . "This content may not be reproduced for commercial purposes"))
 
 (run %FCGI_PORT%)
