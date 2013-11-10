@@ -1,0 +1,42 @@
+<cvt:template
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cvt="http://xmlns.therebetygers.net/civet/0.2"
+    extends="base.html">
+
+  <cvt:head>
+    <cvt:locale lang="en" country="US" encoding="utf-8" />
+
+  </cvt:head>
+
+  <cvt:block name="htmlTitle">
+    <title>Coq au Vin: Login Page</title>
+  </cvt:block>
+
+  <cvt:block name="leftSideContent">
+    <em>Left</em>
+  </cvt:block>
+  
+  <cvt:block name="mainContent">
+    <form method="POST" action="/login">
+      <div class="FormRow">
+        <label for="unameInput">Username:</label>
+        <input id="unameInput" name="uname" type="text" />
+      </div>
+      <div class="FormRow">
+        <label for="passInput">Password:</label>
+        <input id="passInput" name="password" type="password" />
+      </div>
+      <div class="FormRow">
+        <span class="Blank">&#xa0;</span>
+        <div class="ButtonBox">
+        <button type="submit">OK</button><button type="reset">Reset</button>
+        </div>
+      </div>
+    </form>
+  </cvt:block>
+  
+  <cvt:block name="rightSideContent">
+    <em>Right</em>
+  </cvt:block>
+  
+</cvt:template>
