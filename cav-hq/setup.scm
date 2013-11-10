@@ -3,7 +3,7 @@
 (use coq-au-vin)
 (use (prefix cav-db db:))
 (use cav-db-sqlite)
-(use simple-sha1)
+(use crypt)
 
 (define (get-input prompt)
   (printf "~A: " prompt)
@@ -34,7 +34,7 @@
         (blank? (lambda (s) (string=? (string-trim-both s) ""))))
     (if (or (blank? uname) (blank? password) (blank? email))
       (error "User name, password, and email are required fields.")
-      (let ((phash (string->sha1sum password)))
+      (let ((phash (crypt password)))
         (if (blank? dispname)
           ((db:add-user) uname phash email "admin")
           ((db:add-user) uname phash email "admin" dispname))))))
