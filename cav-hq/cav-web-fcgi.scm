@@ -27,7 +27,10 @@
 
 (define (get-session-key env*)
   (let* ((cookie-string (alist-stref "HTTP_COOKIE" env*))
-         (cookies (map string-trim-both (string-split cookie-string ";"))))
+         (cookies
+           (if cookie-string
+             (map string-trim-both (string-split cookie-string ";"))
+             '())))
     (let loop ((cookies* cookies))
       (if (null? cookies*)
         #f
@@ -57,8 +60,6 @@
          (method (alist-stref "REQUEST_METHOD" env*))
          (path-str* (alist-stref "REQUEST_URI" env*))
          (qstring (alist-stref "QUERY_STRING" env*))
-         (client-ip (alist-stref "REMOTE_ADDR" env*))
-         (referer (or (alist-stref "HTTP_REFERER" env*) "/"))
          (path-str (if (string=? path-str* "/") "/" (string-trim-right path-str* #\/)))
          (path (uri-path (uri-reference path-str)))
          (query (form-urldecode qstring))
@@ -80,24 +81,37 @@
              (apply send-page `("text/html" ,data ,@extra-headers))))
          (send-json
            (lambda (data . extra-headers)
-             (apply send-page `("application/json" ,data ,@extra-headers)))))
+             (apply send-page `("application/json" ,data ,@extra-headers))))
+         (when-authorized
+           (lambda (action-key action #!optional (type 'html))
+             (let ((client-ip (alist-stref "REMOTE_ADDR" env*))
+                   (referer (or (alist-stref "HTTP_REFERER" env*) "/"))
+                   (session-key (get-session-key env*)))
+               (cond
+                 ((authorized? session-key action-key client-ip) (action))
+                 ((eqv? type 'html) (send-html (unauthorized-message/html referer #f)))
+                 ((eqv? type 'json) (send-json (unauthorized-message/json referer #f))))))))
     (match spec
       [(or ((/ "") "GET" #f) ((/ "articles") "GET" #f))
        (send-html (get-article-list-page/html out: #f))]
       [(or ((/ "") "GET" #f) ((/ "articles") "GET" ofs))
        (send-html (get-article-list-page/html out: #f offset: (string->number ofs)))]
       [((/ "articles" "new") "GET" _)
-       (send-html (get-new-article-form/html #f))]
+       (when-authorized 'create-article
+                        (lambda () (send-html (get-new-article-form/html #f))))]
       [((/ "articles" "new") "POST" _)
        (let* ((raw-form (fcgi-get-post-data in env))
               (form-data (form-urldecode raw-form)))
-         (send-html (add-article form-data #f)))]
+         (when-authorized 'create-article
+                          (lambda () (send-html (add-article form-data #f)))))]
       [((/ "articles" id/alias) "POST" _)
        (let* ((raw-form (fcgi-get-post-data in env))
               (form-data (form-urldecode raw-form)))
-         (send-html (update-article id/alias form-data #f)))]
+         (when-authorized 'edit-article
+                          (lambda () (send-html (update-article id/alias form-data #f)))))]
       [((/ "articles" id/alias "edit") "GET" _)
-       (send-html (get-article-edit-form/html id/alias #f))]
+       (when-authorized 'edit-article
+                        (lambda () (send-html (get-article-edit-form/html id/alias #f))))]
       [((/ "articles" id/alias) "GET" _)
        (send-html (get-article-page/html id/alias out: #f))]
       [((or (/ "series") (/ "series" "")) "GET" _)
@@ -125,13 +139,15 @@
       [((/ "categories" category) "GET" ofs)
        (send-html (get-article-list-page/html criterion: `(category ,category) out: #f offset: (string->number ofs)))]
       [((/ "login") "GET" _)
-       (send-html (get-login-form out: #f))]
+       (send-html (get-login-form/html #f))]
       [((/ "login") "POST" _)
        (let* ((raw-form (fcgi-get-post-data in env))
-              (form-data (form-urldecode raw-form)))
-         (let-values (((page session) (webform-login form-data client-ip)))
+              (form-data (form-urldecode raw-form))
+              (client-ip (alist-stref "REMOTE_ADDR" env*)))
+         (let-values (((page session) (webform-login form-data client-ip #f)))
            (if session
-             (send-html page `("Set-Cookie:" . ,(sprintf "SessionKey=~A" session)))
+             (send-html page `("Set-Cookie" . ,(sprintf "SessionKey=~A" session)))
+             (send-html page))))]
       [_
         (out "Status: 404 Not Found\r\n\r\n")])))
 
