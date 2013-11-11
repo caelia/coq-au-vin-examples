@@ -19,7 +19,7 @@
   <cvt:block name="mainContent">
     <form name="articleForm" method="POST" class="ArticleEditForm">
       <cvt:attr name="action">
-        <cvt:if test="articleID">
+        <cvt:if test="article_id">
           /articles/<cvt:var name="article_id"/>
           <cvt:else>/articles/new</cvt:else>
         </cvt:if>
