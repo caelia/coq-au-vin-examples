@@ -66,8 +66,21 @@ html {
 
 #header {
   padding-bottom: 1em;
-  margin-bottom: 2em;
   border-bottom: 3px solid #009080;
+}
+
+#controlBar {
+  margin-bottom: 1.5em;
+  text-align: right;
+  font-family: florencesans_sc_expbold;
+  font-size: 90%;
+}
+
+#controlBar a {
+  color: #009080;
+  text-decoration: none;
+  padding: 0.3em 0.7em 0.1em 0.7em;
+  border-bottom: 1px dotted #009080;
 }
 
 #footer {
