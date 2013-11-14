@@ -116,7 +116,7 @@ html {
 }
 
 .TeaserBlock {
-  padding-bottom: .8em;
+  padding: 0 .5em .8em .5em;
   margin-bottom: .8em;
   border-top: 2px dotted #009080;
 }
