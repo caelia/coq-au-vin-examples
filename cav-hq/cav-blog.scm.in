@@ -1,6 +1,6 @@
 (use coq-au-vin)
 (use cav-db-sqlite)
-(include "cav-web-fcgi.scm")
+(use cav-web-fcgi)
 
 (define blog-root "%BLOG_ROOT%")
 
