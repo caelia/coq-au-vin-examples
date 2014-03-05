@@ -1,6 +1,7 @@
 (use coq-au-vin)
 (use cav-db-sqlite)
-(include "../common/cav-web-fcgi.scm")
+(use cav-web-fcgi)
+
 (include "../common/populate-db.scm")
 
 (enable-sqlite "data/demo.db" "data/content")
