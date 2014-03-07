@@ -25,7 +25,10 @@
     </div>
     <div id="controlBar">
       <cvt:block name="pageControls">
-        <a href="/login">LOGIN</a>
+        <cvt:if test="logged_in">
+          <a href="/logout">LOGOUT</a>
+          <cvt:else><a href="/login">LOGIN</a></cvt:else>
+        </cvt:if>
       </cvt:block>
     </div>
     <div id="mainRegion">
