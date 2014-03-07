@@ -1,6 +1,7 @@
 (use coq-au-vin)
 (use cav-db-sqlite)
-(include "../common/cav-web-fcgi.scm")
+(use cav-web-fcgi)
+
 (include "../common/populate-db.scm")
 
 (enable-sqlite "data/demo.db" "data/content")
@@ -11,8 +12,8 @@
 (app-init template-path: "dynamic/templates")
 
 (config-set!
-  '(urlScheme . "http") '(hostName . "quahog") '(bodyMD . "") '(jquerySrc . "/scripts/jquery.js")
-  '(canEdit . #t) '(copyright_year . 2013) '(copyright_holders . "Madeleine C St Clair")
-  '(rights_statement . "You have no rights") '(htmlTitle . "Civet Page!") '(bodyClasses . ""))
+  '(url_scheme . "http") '(host_name . "quahog") '(body_md . "") '(jquery_src . "/scripts/jquery.js")
+  '(can_edit . #t) '(copyright_year . 2013) '(copyright_holders . "Madeleine C St Clair")
+  '(rights_statement . "You have no rights") '(html_title . "Civet Page!") '(body_classes . ""))
 
 (run 4567)

@@ -6,18 +6,18 @@
   <cvt:head>
     <cvt:locale lang="en" country="US" encoding="utf-8" />
 
-    <cvt:defvar name="editURL">
-      /articles/<cvt:var name="articleID"/>/edit
+    <cvt:defvar name="edit_url">
+      /articles/<cvt:var name="article_id"/>/edit
     </cvt:defvar>
   </cvt:head>
 
   <cvt:block name="pageScripts">
     <script type="text/javascript">
       var dirty = false;
-      var bodyMD = "<cvt:var name="bodyMD"/>";
+      var bodyMD = "<cvt:var name="body_md"/>";
       var bodyDiv;
       var bodyHTML;
-      var canEdit = <cvt:var name="canEdit" type="boolean" format="ls"/>;
+      var canEdit = <cvt:var name="can_edit" type="boolean" format="ls"/>;
     
       function showEditButton() {
       }
@@ -108,8 +108,8 @@
         </cvt:with>
       </cvt:for>
     </div>
-    <form id="beginEditForm" cvt:action="editURL" method="POST">
-      <input id="returnTo" name="returnTo" type="hidden" cvt:value="currentPath" />
+    <form id="beginEditForm" cvt:action="edit_url" method="POST">
+      <input id="returnTo" name="returnTo" type="hidden" cvt:value="current_path" />
       <button id="editButton" name="editButton" type="submit">Edit</button>
     </form>
   </cvt:block>

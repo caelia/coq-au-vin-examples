@@ -6,12 +6,12 @@
   <cvt:head>
     <cvt:locale lang="en" country="US" encoding="utf-8" />
 
-    <cvt:defvar name="contentPath">
-      <cvt:var name="urlScheme"/>://<cvt:var name="hostName"/>/content/
+    <cvt:defvar name="content_path">
+      <cvt:var name="url_scheme"/>://<cvt:var name="host_name"/>/content/
     </cvt:defvar>
 
     <!-- This doesn't work, because cvt:attr is handled outside the normal flow
-    <cvt:defmacro name="articleHREF">
+    <cvt:defmacro name="article_href">
       <cvt:attr name="href"><cvt:var name="article.node_id" />.html</cvt:attr>
     </cvt:defmacro>
     -->
@@ -29,10 +29,10 @@
   <cvt:block name="pageScripts">
     <script type="text/javascript">
       var dirty = false;
-      var bodyMD = "<cvt:var name="bodyMD"/>";
+      var bodyMD = "<cvt:var name="body_md"/>";
       var bodyDiv;
       var bodyHTML;
-      var canEdit = <cvt:var name="canEdit" type="boolean" format="ls"/>;
+      var canEdit = <cvt:var name="can_edit" type="boolean" format="ls"/>;
     
       function showEditButton() {
       }
