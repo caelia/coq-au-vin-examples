@@ -13,8 +13,15 @@ if [ -n "$2" ]; then
     fcgi_port="$2"
 fi
 
+test_mode=""
+
+if [ -n "$3" ]; then
+    test_mode=" #t"
+fi
+
 sed "s|%BLOG_ROOT%|$dest_path|g" cav-blog.scm.in \
-    |sed "s|%FCGI_PORT%|$fcgi_port|g" >cav-blog.scm
+    |sed "s|%FCGI_PORT%|$fcgi_port|g" \
+    |sed "s|%TEST_MODE%|$test_mode|g" >cav-blog.scm
 
 mkdir -p ${dest_path}/data/content
 cp -R dynamic $dest_path

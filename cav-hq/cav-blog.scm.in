@@ -13,4 +13,4 @@
   '(can_edit . #t) '(copyright_year . 2013) '(copyright_holders . "Matt Gushee")
   '(rights_statement . "This content may not be reproduced for commercial purposes"))
 
-(run %FCGI_PORT%)
+(run %FCGI_PORT%%TEST_MODE%)
