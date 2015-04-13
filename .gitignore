@@ -9,3 +9,7 @@ static-demo/pages/*.html
 *-pages
 *.sxml
 cav-hq/cav-blog.scm
+*.ttf
+*.woff
+*.eot
+*.svg
